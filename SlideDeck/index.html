@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Connecting Angular and CFML</title>
+		<link rel="stylesheet" href="../assets/Reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../assets/Reveal.js/css/theme/moon.css" id="theme">
+
+		<style>
+			.reveal h2
+			{ 
+				text-transform: none; 
+				font-size: 60px;
+			}
+
+			.reveal ul li, .reveal p
+			{
+				font-size: 34px;
+			}
+
+			.highlight 
+			{ 
+				color: green 
+			}
+
+			.align-left
+			{
+				text-align: left;
+			}
+		</style>		
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>CommandBox vs Node.js</h2>
+					<p>Nolan Erck<br>South of Shasta</p>
+				</section>
+
+				<section>
+					<h2>About Me</h2>
+					<ul>
+						<li>Software Consultant (southofshasta.com)
+							<ul>
+								<li>Software Development, Training, Design</li>
+							</ul>
+						</li>
+
+						<li>ColdFusion, C++, Java, jQuery, PHP, .NET, HTML5, Angular, SQL, etc...</li>
+						<li>Manager of SacInteractive User Group</li>
+						<li>Reformed Video Game Developer (Grim Fandango, SimPark, StarWars Rogue Squadron, etc).</li>
+						<li>Music Junkie</li>
+					</ul>
+				</section>
+
+				<section data-background-image="./images/record-collection.jpg" data-background-size="contain">
+				</section>
+
+				<section data-background-image="./images/charlie_brown.png" data-background-size="contain">
+				</section>
+
+				<section>
+					<h2>Slide deck and code samples are here:</h2>
+					<p>github.com/nolanerck<br />angularjs-and-cfml-preso</p>
+				</section>
+
+				<section>
+					<h2>Today's Talk</h2>
+					<ul>
+						<li>A quick intro to AngularJS. 1.x</li>
+						<li>Overview of API and REST</li>
+						<li>Several code demos</li>
+						<li>Hooking different types of CFML up to an Angular app</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Show of Hands</h2>
+					<ul>
+						<li>Who is brand new to AngularJS?</li>
+						<li>Who is <em>not</em> using the API Manager?</li>
+						<li>Who is <em>not</em> using MVC (ColdBox, Framework1, etc)?</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>You're all in the right place</h2>
+					<ul>
+						<li>You don't <em>have</em> to use API Manager</li>
+						<li>You don't <em>have</em> to have proper MVC code</li>
+						<li>You don't <em>have</em> to have be an Angular guru to start</li>
+						<li>...but the more you know is obviously helpful</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>For today's talk</h2>
+					<ul>
+						<li>We're using Angular 1.x
+							<ul>
+								<li>Path of least resistance, fewer moving parts than v2+</li>
+								<li>Supported thru mid-2020</li>
+							</ul>
+						</li>
+						<li>ColdFusion 2016</li>
+						<li>But nothing in the talk is CF 2016 specific</li>
+						<li>Everything is running via CommandBox</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>For Angular 2+</h2>
+					<ul>
+						<li>I have a version of this talk for Angular 2+</li>
+						<li>Very different workflow</li>
+						<li>Requires familiarity with Node, CLI tools, Promises, rxjs, Observables</li>
+						<li>More moving parts than Angular 1</li>
+						<li>Contact me to schedule that preso</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>What's an API?</h2>
+					<ul>
+						<li>Application Programming Interface</li>
+						<li>Quasi-generic way to interact with a system</li>
+						<li>Just a bunch of URLs</li>
+						<li>The URLs return data to whatever system requested it</li>
+						<li>Data comes back (hopefully!) in a standard format: XML, SOAP, JSON, etc</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>API vs REST API</h2>
+					<ul>
+						<li>All REST APIs are APIs</li>
+						<li>But not all APIs are RESTful</li>
+						<li>They all <em>do</em> the same thing</li>
+						<li>Just a different style in how you talk to the API</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Non-REST API</h2>
+					<ul>
+						<li>http://sitename/api/getUser.cfm?ID=123</li>
+						<li>http://sitename/api/createUser.cfm</li>
+						<li>http://sitename/api/updateUser.cfm?ID=123</li>
+						<li>http://sitename/api/deleteUser.cfm?ID=123</li>
+						<li>All HTTP "get" requests</li>
+						<li>Can copy/paste all URLs and run them in a browser (for debugging)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>REST API</h2>
+					<ul>
+						<li>http://sitename/api/user/123 (get)</li>
+						<li>http://sitename/api/user/123 (create)</li>
+						<li>http://sitename/api/user/123 (update)</li>
+						<li>http://sitename/api/user/123 (delete)</li>
+						<li>The <em>same</em> URL for all actions</li>
+						<li>Change the HTTP verb to change the behavior</li>
+						<li>GET, POST, PUT, DELETE</li>
+						<li>Test it with Postman or Paw</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>API vs REST API</h2>
+					<ul>
+						<li>So which is best?</li>
+						<li>REST has a more <em>consistent</em> interface URL scheme</li>
+						<li>REST is the current "standard"</li>
+						<li>But under the hood, your code does the same "thing" either way</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Does this mean...</h2>
+					<ul>
+						<li>I have to install something on my CF server?</li>
+						<li>No</li>
+						<li>Angular is just .js files</li>
+						<li>Many ways to build API functionality in CFML</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Does this mean...</h2>
+					<ul>
+						<li>I <em>have</em> to use AngularJS?</li>
+						<li>No</li>
+						<li>Many ways to connect JavaScript to an API</li>
+						<li>Vue, Angular, React, jQuery, vanilla JS all work</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Does this mean...</h2>
+					<ul>
+						<li>I have to rewrite my whole CF app?</li>
+						<li>No</li>
+						<li>Angular 1.x can drop into existing request/response apps</li>
+						<li>(Harder to do with Angular 2+)</li>
+						<li>We'll show several ways to use Angular and CFML</li>
+					</ul>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App1_HelloWorld">Your first AngularJS app</a></p>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App2_BasicCFM">Angular + Basic CFM template</a></p>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App3_CFFunction">Angular + CFFunction</a></p>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App4_ReturnFormat">Angular + CFC ReturnFormat</a></p>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App5_Routes">Angular Routes</a></p>
+				</section>
+
+				<section>
+					<p><a href="/taffyapi">Taffy</a></p>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App6_WithTaffy">AngularJS + Taffy</a></p>
+				</section>
+
+				<section>
+					<p><a href="/Angular_App7_WithColdBoxREST">AngularJS + ColdBox REST</a></p>
+				</section>
+
+				<section>
+					<h2>Angular + ColdBox REST</h2>
+					<ul>
+						<li>Use CommandBox</li>
+						<li>coldbox create app name=ColdboxRestAPI skeleton=rest</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Angular + ColdBox REST</h2>
+					<ul>
+						<li>coldbox create handler name=book actions=index,view,save,remove</li>
+						<li>coldbox create handler name=movie actions=index</li>
+						<li>coldbox create handler name=musicians actions=index</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Other info</h2>
+					<ul>
+						<li>Don't have to "configure" Taffy to use Angular. It "just works".</li>
+						<li>Don't have to "configure" AngularJS to use Taffy/CFML. It "just works".</li>
+						<li>Ditto for ColdBox REST - it just works!</li>
+						<li>CF just knows something requested a URL.</li>
+						<li>AngularJS just knows it got back some JSON from a URL.</li>
+						<li>It all "just works".</li>
+						<li>The same is true for any other JS framework - Vue, React, NativeScript, jQuery, etc.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Other info</h2>
+					<ul>
+						<li>Taffy works on all versions of CF from 8 thru 2016</li>
+						<li>ColdBox REST is another great option for REST APIs.
+							<br />
+							Talk to the Ortus folks for more details. And attend Into The Box 2019!
+						</li>
+						<li>ColdBox REST also "just works" with any JavaScript framework. No config needed.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>So what's the catch?</h2>
+					<ul>
+						<li>A few new conventions to learn, but they're not terribly hard.</li>
+						<li>If you have lots of strange server mappings, may take a little time to configure.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Other Resources</h2>
+					<ul>
+						<li>South of Shasta - onsite and remote training</li>
+						<li>"Object-Oriented Programming in ColdFusion" by Matt Gifford</li>
+						<li>docs.angularjs.org</li>
+						<li>docs.taffy.io</li>
+						<li>Ortus Solutions</li>
+						<li>coldbox.ortusbooks.com</li>
+						<li>Talk to people at the conference!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Questions? Comments?</h2>
+					<ul>
+						<li>southofshasta.com</li>
+						<li>nolan@southofshasta.com</li>
+						<li>Twitter: @southofshasta</li>
+						<li>Github: nolanerck</li>
+						<li>Slides and code: <br />github.com/nolanerck/angularjs-and-cfml-preso</li>
+					</ul>
+					<p>Thanks!</p>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="../assets/Reveal.js/js/reveal.js"></script>
+		<script>
+			Reveal.initialize();
+
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../assets/reveal.js/css/print/pdf.css' : '../assets/reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</body>
+</html>
