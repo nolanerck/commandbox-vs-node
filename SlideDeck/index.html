@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Connecting Angular and CFML</title>
-		<link rel="stylesheet" href="../assets/Reveal.js/css/reveal.css">
-		<link rel="stylesheet" href="../assets/Reveal.js/css/theme/moon.css" id="theme">
+		<link rel="stylesheet" href="../Reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../Reveal.js/css/theme/moon.css" id="theme">
 
 		<style>
 			.reveal h2
@@ -69,19 +69,27 @@
 					<ul>
 						<li>Screenshots and recorded videos</li>
 						<li>No smoke and mirrors</li>
-						<li>Hotel wifi</li>
+						<li>I'm merely avoiding hotel wifi</li>
 					</ul>
 				</section>
 	
 				<section>
-					<h2>Today's Talk</h2>
+					<h2>Let's get started!</h2>
+				</section>
+
+				<section>
+					<h2>We've all heard these things:</h2>
 					<ul>
 						<li>JavaScript has all the cool toys!</li>
-						<li>CFML is old and dying and only for legacy stuff!</li>
-						<li>Incorrect! CommandBox is here to save the day!</li>
-						<li>Quick primer to Node.js</li>
-						<li>Quick primer to CommandBox</li>
-						<li>Leave you feeling excited about modern CFML</li>
+						<li>CFML is old, dying and only for legacy stuff!</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Incorrect!</h2>
+					<ul>
+						<li>CommandBox is here to save the day!</li>
+						<li>All of the Node.js fundamentals are available to CFML developers</li>
 					</ul>
 				</section>
 
@@ -98,6 +106,15 @@
 				</section>
 
 				<section>
+					<h2>Installing Node.js</h2>
+					<ul>
+						<li>Go to Nodejs.org</li>
+						<li>Click one of these:</li>
+					</ul>
+					<img src="./images/node-install-screen.png" alt="Node.js install screen" />
+				</section>
+
+				<section>
 					<h2>Node.js as a CLI</h2>
 					<ul>
 						<li>Command Line tools for development</li>
@@ -107,6 +124,16 @@
 						<li>Meaning, they're all written in JavaScript</li>
 					</ul>
 				</section>
+
+				<section>
+					<h2>Node.js as a CLI</h2>
+					<ul>
+						<li>Command line tools are no longer only done in low-level languages like C++</li>
+						<li></li>
+					</ul>
+				</section>
+				
+
 
 				<section>
 					<h2>Okay so what's the catch?</h2>
@@ -126,12 +153,15 @@
 					<h2>Other Resources</h2>
 					<ul>
 						<li>South of Shasta - onsite and remote training</li>
-						<li>Node website</li>
-						<li>CommandBox website</li>
+						<li>nodejs.org</li>
+						<li>commandbox.ortusbooks.com</li>
 						<li>Ortus Solutions</li>
-						<li>coldbox.ortusbooks.com</li>
 						<li>Talk to people at the conference!</li>
 					</ul>
+				</section>
+
+				<section>
+					<h2>Learning in 30 minutes a day.</h2>
 				</section>
 
 				<section>
@@ -148,14 +178,14 @@
 			</div>
 		</div>
 
-		<script src="../assets/Reveal.js/js/reveal.js"></script>
+		<script src="../Reveal.js/js/reveal.js"></script>
 		<script>
 			Reveal.initialize();
 
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? '../assets/reveal.js/css/print/pdf.css' : '../assets/reveal.js/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../reveal.js/css/print/pdf.css' : '../reveal.js/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
 	</body>
