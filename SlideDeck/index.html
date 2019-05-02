@@ -393,20 +393,57 @@
 					<p>CommandBox 7, Node 7</p>
 				</section>
 
-				<!-- <li>
-						Also a "devDependencies" section
-						<br>
-						Things your app needs to <em>build</em>
-						tests
-						CLI tools
-						TypeScript transpiler
-						Code Analyzer, linter
-					</li> -->
-
-
+				<section>
+					<h2>Dev Dependencies With Node</h2>
+					<ul>
+						<li>In package.json, "devDependencies" section
+							<br>
+							Things your app needs to <em>build</em>
+						</li>
+						<li>CLI Tools, Typescript transpiler, Code Analyzer, Linter, etc</li>
+						<li>Angujlar CLI, TypeScript, Webpack, etc</li>
+						<li>"npm install --dev [thing]"</li>
+						<li>Node goes out to "the registry" and grabs those assets</li>
+						<li>Puts them in "node_modules" folder</li>
+					</ul>
+				</section>
 
 				<section>
-					<h2>Dependencies With CommandBox</h2>
+					<h2>Dev Dependencies Witih Node</h2>
+					<img src="./images/node-dev-dependencies.png" />
+				</section>
+	
+				<section>
+					<h2>Dev Dependencies Witih Node</h2>
+					<img src="./images/node-modules-devdependencies-folder.png" />
+				</section>
+
+				<section>
+					<h2>Dev Dependencies Witih CommandBox</h2>
+					<ul>
+						<li>In box.json, "devDependencies" section
+							<br>
+							Things your app needs to <em>build</em>
+						</li>
+						<li>jquery, lodash, Angular, libaries from your team, etc</li>
+						<li>"box install --saveDev [thing]"</li>
+						<li>CommandBox goes out to "the cloud" and grabs those assets</li>
+						<li>Puts them in "installPaths" folders</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Dev Dependencies Witih CommandBox</h2>
+					<img src="./images/box-dev-dependencies.png" />
+				</section>
+
+				<section>
+					<h2>Dev Dependencies Witih CommandBox</h2>
+					<div>
+						<video controls>
+							<source src="./videos/box-install-dev-dependencies.mp4" />
+						</video>
+					</div>
 				</section>
 
 				<section>

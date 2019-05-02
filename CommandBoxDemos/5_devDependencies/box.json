@@ -1,0 +1,18 @@
+{
+    "dependencies":{
+        "coldbox":"^5.0.0",
+        "bootstrap":"git://github.com/twbs/bootstrap.git#v3.3.7",
+        "jquery":"git://github.com/jquery/jquery.git#2.2.4",
+        "bootstrap-rating":"git://github.com/dreyescat/bootstrap-rating.git#v1.4.0"
+    },
+    "devDependencies":{
+        "testbox":"^2.0.0"
+    },
+    "installPaths":{
+        "coldbox":"coldbox",
+        "testbox":"testbox",
+        "bootstrap":"assets/bootstrap",
+        "jquery":"assets/jquery",
+        "bootstrap-rating":"assets/bootstrap-rating"
+    }
+}
