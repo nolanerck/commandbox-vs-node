@@ -23,10 +23,3 @@ need -everything- to be behind a secure firewall
 even copies of open source libraries you use
 
 
-
-So how do you start using npm?
-Install the app from nodejs.org
-Done.
-
-So how do you start using CommandBox?
-Same answer.
